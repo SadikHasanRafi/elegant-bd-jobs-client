@@ -2,12 +2,13 @@ import 'react'
 import 'react'
 import { RouterProvider } from 'react-router-dom';
 import { router } from './Routes/Routes';
+import { JobProvider } from './Contexts/JobContext';
 
 function App() {
 
   return (
     <div>
-      <RouterProvider router={router}></RouterProvider>
+      <JobProvider><RouterProvider router={router}></RouterProvider></JobProvider>
     </div>
   )
 }
