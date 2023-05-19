@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
-import Banner from '../Pages/Home/'
+import Banner from '../Pages/Home/Banner'
 
 export const router = createBrowserRouter([
   {
