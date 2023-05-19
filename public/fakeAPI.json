@@ -1,0 +1,39 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "location": "San Francisco, CA",
+      "company": "TechCo",
+      "category": "Software Development",
+      "description": "We are seeking a skilled software developer to join our team and work on cutting-edge projects."
+    },
+    {
+      "id": 2,
+      "location": "New York, NY",
+      "company": "WebTech",
+      "category": "Web Development",
+      "description": "Join our web development team and contribute to the development of innovative web applications."
+    },
+    {
+      "id": 3,
+      "location": "Seattle, WA",
+      "company": "Data Systems",
+      "category": "Data Science",
+      "description": "Looking for a data scientist to analyze and interpret complex datasets and generate actionable insights."
+    },
+    {
+      "id": 4,
+      "location": "Austin, TX",
+      "company": "AI Solutions",
+      "category": "Artificial Intelligence",
+      "description": "Join our AI team to develop intelligent algorithms and build machine learning models."
+    },
+    {
+      "id": 5,
+      "location": "Boston, MA",
+      "company": "CyberSec",
+      "category": "Cybersecurity",
+      "description": "Seeking a cybersecurity expert to ensure the safety and security of our systems and networks."
+    }
+  ]
+}
