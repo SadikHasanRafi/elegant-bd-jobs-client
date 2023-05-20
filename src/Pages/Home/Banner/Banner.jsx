@@ -14,7 +14,7 @@ const Banner = () => {
           excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
           id nisi.
         </p>
-        <button className="btn bg-primary text-base-100 px-5 capitalize text-[16px] font-medium">
+        <button className="btn-style">
           Get started
         </button>
         </div>

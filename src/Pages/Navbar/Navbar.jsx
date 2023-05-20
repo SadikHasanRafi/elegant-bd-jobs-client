@@ -70,8 +70,8 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-transparent border-none hover:bg-transparent hover:text-neutral px-5 capitalize text-[16px] font-medium">Login</a>
-        <a className="btn bg-primary text-base-100 px-5 capitalize text-[16px] font-medium">Get started</a>
+        <a className="btn-style hover:bg-transparent bg-transparent hover:text-neutral text-black">Login</a>
+        <a className="btn-style">Get started</a>
       </div>
     </div>
     </div>
