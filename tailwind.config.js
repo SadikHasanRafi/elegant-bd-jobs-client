@@ -8,8 +8,8 @@ export default {
       themes:[
       {
         hiretoolTheme:{
-          primary: "#20C997",
-          neutral: "#00AE88",       
+          primary: "#26bbac",
+          neutral: "#00e5bd",       
           "base-100": "#FFFFFF",
         },  
       }
