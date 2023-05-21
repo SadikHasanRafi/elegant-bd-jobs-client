@@ -25,20 +25,20 @@ const AboutUs = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 text-center w-full">
                 <div className="bg-base-100 bg-opacity-20 backdrop-blur-md  rounded-xl py-6">
-                <div className="stat-title text-white">Jobs</div>
                 <div className="stat-value text-white">{jobs.length}</div>
+                <div className="stat-title text-white">Jobs</div>
               </div>
               <div className="bg-base-100 bg-opacity-20 backdrop-blur-md  rounded-xl py-6">
-                <div className="stat-title text-white">Vacancies</div>
                 <div className="stat-value text-white">63</div>
+                <div className="stat-title text-white">Vacancies</div>
               </div>
               <div className="bg-base-100 bg-opacity-20 backdrop-blur-md  rounded-xl py-6">
-                <div className="stat-title text-white">Companies</div>
                 <div className="stat-value text-white">4,00</div>
+                <div className="stat-title text-white">Companies</div>
               </div>
               <div className="bg-base-100 bg-opacity-20 backdrop-blur-md  rounded-xl py-6">
-                <div className="stat-title text-white">Job Seekers</div>
                 <div className="stat-value text-white">1,200</div>
+                <div className="stat-title text-white">Job Seekers</div>
               </div>
             </div>
           </div>
