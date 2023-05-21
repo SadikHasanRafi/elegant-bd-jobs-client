@@ -4,7 +4,7 @@ const Sector = (props) => {
   return (
     <div>
       <div>
-        <div className="card-style">
+        <div className="card bg-base-100 border-[0.5px] hover:border-primary transition-all">
           <figure>
             <img
               src={props.img}
