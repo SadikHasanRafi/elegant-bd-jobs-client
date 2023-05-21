@@ -3,7 +3,7 @@ import handshake from "../../../assets/handshake.jpg";
 
 const Banner = () => {
   return (
-    <div className="card h-[90vh] lg:card-side  bg-primary bg-opacity-10">
+    <div className="card h-[90vh] lg:card-side bg-primary bg-opacity-10">
       <div className="card-body lg:w-6/12 justify-center order-last lg:order-none items-center">
         <div className="lg:w-6/12">
         <h1 className="text-5xl font-bold">
@@ -14,7 +14,7 @@ const Banner = () => {
           excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
           id nisi.
         </p>
-        <button className="btn bg-primary text-base-100 px-5 capitalize text-[16px] font-medium">
+        <button className="btn-style">
           Get started
         </button>
         </div>

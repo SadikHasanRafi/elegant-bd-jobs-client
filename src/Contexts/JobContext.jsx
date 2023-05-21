@@ -6,7 +6,7 @@ export function JobProvider({ children }) {
     const [jobs, setJobs] = useState([]);
   
     useEffect(() => {
-      fetch('../../public/fakeAPI.json')
+      fetch('/fakeAPI.json')
         .then((res) => res.json())
         .then((data) => {
           setJobs(data.jobs)

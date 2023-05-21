@@ -11,7 +11,7 @@ const AboutUs = () => {
         className="hero min-h-screen"
         style={{ backgroundImage: `url(${heroImg})` }}
       >
-        <div className="hero-overlay bg-opacity-90"></div>
+        <div className="hero-overlay bg-primary bg-opacity-[85%]"></div>
         <div className="hero-content">
           <div className="max-w-[80%] ">
             <h1 className="mb-8 text-5xl font-bold text-white">hiretool</h1>
