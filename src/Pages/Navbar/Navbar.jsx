@@ -1,5 +1,6 @@
 import "react";
 import logo from '../../assets/logo.svg'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const menuItems = (
@@ -35,7 +36,7 @@ const Navbar = () => {
       </>
     )
   return (
-    <div className="border-b-[1px] fixed top-0 left-0 w-full bg-white bg-opacity-80 backdrop-blur-lg z-10">
+    <div className="border-b-[1px] sticky top-0 z-10 w-full bg-white bg-opacity-90 backdrop-blur-md">
     <div className="navbar bg-transparent p-5 bg-base-100 md:w-4/5  mx-auto">
       <div className="navbar-start">
         {/* <div className="dropdown">
@@ -70,7 +71,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btnOnlyText">Login</a>
+        <Link to="/login" className="btnOnlyText">Login</Link>
         <a className="btn-style">Get started</a>
       </div>
     </div>
