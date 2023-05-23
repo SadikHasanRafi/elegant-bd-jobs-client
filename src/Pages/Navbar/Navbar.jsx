@@ -57,7 +57,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 w-52"
           >
             {menuItems}
           </ul>
@@ -70,8 +70,8 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-transparent border-none hover:bg-transparent hover:text-neutral px-5 capitalize text-[16px] font-medium">Login</a>
-        <a className="btn bg-primary text-base-100 px-5 capitalize text-[16px] font-medium">Get started</a>
+        <a className="btnOnlyText">Login</a>
+        <a className="btn-style">Get started</a>
       </div>
     </div>
     </div>

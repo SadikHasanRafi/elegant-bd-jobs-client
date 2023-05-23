@@ -1,0 +1,19 @@
+
+  [
+    {  
+        "title": "Jobs",
+        "totalJobs": 100 
+    },
+    {  
+        "title": "Companies",
+        "totalCompany": 50 
+    },
+    {  
+        "title": "Job Seekers",
+        "totalJobSeeker": 200 
+    },
+    {  
+        "title": "Vacancies",
+        "totalVacancies": 3
+     }
+  ]

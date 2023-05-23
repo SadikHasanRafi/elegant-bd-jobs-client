@@ -1,13 +1,15 @@
 import  'react';
 import Banner from './Banner/Banner'
 import Sectors from './Sectors/Sectors';
-import Jobs from '../Jobs/Jobs';
+import SomeJobs from './SomeJobs/SomeJobs';
+import AboutUs from '../AboutUs/AboutUs';
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
             <Sectors></Sectors>
-            <Jobs></Jobs>
+            <SomeJobs></SomeJobs>
+            <AboutUs></AboutUs>
         </div>
     );
 };
