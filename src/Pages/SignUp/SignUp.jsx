@@ -2,11 +2,35 @@ import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup } f
 import "react";
 import auth from "../../firebase/firebase.config";
 import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const SignUp = () => {
+  const [err,setErr] = useState({})
   const provider = new GoogleAuthProvider();
   const {setUser,user} = useContext(AuthUserRoleContext)
+  const [sendUserToDb, setSendUserToDb] = useState(false)
+  
+  useEffect( () => {
+    insertUserIntoDB();
+  }, [sendUserToDb])
+  
+
+  const insertUserIntoDB = async () => {
+
+    console.log("katzu ta coltese")
+    if (sendUserToDb) {
+      console.log(sendUserToDb)
+      axios.post('http://localhost:5000/insertuser',user)
+      .then(function (response) {
+        console.log("axios response ",response);
+      }).catch(function (error) {
+        console.warn(error);
+      });
+      setSendUserToDb(false)
+    }
+  }
+
 
   const handleSignInByEmailPassword = async (e) => {
     e.preventDefault();
@@ -14,23 +38,23 @@ const SignUp = () => {
     const password = e.target.password.value;
 
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      setUser(userCredential.user)
-    })
-    .catch((error) => {
+    .then(async (userCredential) => {
+      setUser(userCredential.user) 
+      await insertUserIntoDB();
+    }).catch((error) => {
       const errorMessage = error.message;
       console.warn(errorMessage)
+      setErr(error)
     });
-
-    console.log(user)
-
+    console.log(user,err)
   };
 
   const handleSignInByGoogle = async () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+      .then(async (result) => {
+        setUser(result.user)
+        setSendUserToDb(true)
+        console.log("login by emailhoise ",user.email);
       })
       .catch((error) => {
         console.log(error);
@@ -45,7 +69,6 @@ const SignUp = () => {
         // const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
-
     console.log("mew");
   };
   return (
