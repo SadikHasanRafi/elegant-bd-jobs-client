@@ -35,5 +35,10 @@ export default {
     },
   },
   plugins: [require('daisyui')],
+  variants: {
+    extend: {
+      scrollbar: ['rounded-md'],
+    },
+  },
 }
 

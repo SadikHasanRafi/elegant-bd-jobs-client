@@ -10,3 +10,15 @@
 .btn-stroked{
     @apply btn btn-outline btn-primary text-primary  hover:bg-primary hover:border-primary normal-case;
 }
+.card-clicked{
+    @apply focus-visible:outline focus-visible:outline-primary;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
