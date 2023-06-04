@@ -6,6 +6,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import Jobs from "../Pages/Jobs/Jobs";
 import Login from "../Pages/Login/Login";
 import NotFound from "../Pages/Shared/Loading/NotFound/NotFound";
+import SetCompanyProfile from "../Pages/SetCompanyProfile/SetCompanyProfile";
 
 
 export const router = createBrowserRouter([
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <Login></Login>
       },
+      {
+        path: "/set-company-profile",
+        element: <SetCompanyProfile></SetCompanyProfile>
+      }
 
     ],
   },

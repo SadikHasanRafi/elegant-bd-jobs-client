@@ -1,8 +1,23 @@
 import "react";
 import logo from '../../assets/logo.svg'
 import { Link } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
+import { AuthUserRoleContext } from "../../Contexts/AuthUserRoleContext";
+import { useContext } from "react";
 
 const Navbar = () => {
+
+  //tesing er jonno ei block ta 
+
+  const auth = getAuth();
+  const { setCurrentUser, currentUser } = useContext(AuthUserRoleContext);
+  // signOut(auth).then(() => {
+  //   console.log("sign out done")
+  //   // Sign-out successful.
+  // })
+
+  //testing ekhane done
+
     const menuItems = (
         <>
         {/* <li>
@@ -74,6 +89,15 @@ const Navbar = () => {
         <Link to="/login" className="btnOnlyText">Login</Link>
         <a className="btn-style">Get started</a>
       </div>
+
+
+{/* eta testing er jjonno so far */}
+
+<a className="btn btn-outline btn-accent" onClick={async () =>{ await signOut(auth);console.log("sign out");setCurrentUser({}) }}> Logout</a>
+
+{/* testing ekhane ses */}
+
+
     </div>
     </div>
   );
