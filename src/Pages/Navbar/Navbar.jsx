@@ -22,8 +22,8 @@ const Navbar = () => {
         <>
         {/* <li>
         <a>Item 1</a>
-      </li>
-      <li tabIndex={0}>
+      </li> */}
+      {/* <li tabIndex={0}>
         <a className="justify-between">
           Parent
           <svg
@@ -44,10 +44,13 @@ const Navbar = () => {
             <a>Submenu 2</a>
           </li>
         </ul>
+      </li> */}
+      <li>
+        <Link to="/setrole">Select Role</Link>
       </li>
       <li>
-        <a>Item 3</a>
-      </li> */}
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
       </>
     )
   return (

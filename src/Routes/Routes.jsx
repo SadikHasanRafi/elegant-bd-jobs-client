@@ -8,6 +8,9 @@ import Login from "../Pages/Login/Login";
 import NotFound from "../Pages/Shared/Loading/NotFound/NotFound";
 import SetCompanyProfile from "../Pages/SetCompanyProfile/SetCompanyProfile";
 import SetEmployeeProfile from "../Pages/SetEmployeeProfile/SetEmployeeProfile";
+import SetRole from "../Pages/SetRole/SetRole";
+import DashboardLayout from "../Layout/DashboardLayout";
+import SavedJobs from "../Pages/Dashboard/SavedJobs/SavedJobs";
 
 
 export const router = createBrowserRouter([
@@ -44,7 +47,19 @@ export const router = createBrowserRouter([
         path: "/set-employee-profile",
         element: <SetEmployeeProfile></SetEmployeeProfile>
       },
-
+        path: "/setrole",
+        element: <SetRole></SetRole>
+      },
     ],
   },
+  {
+    path: "dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        path: "dashboard/savedjobs",
+        element: <SavedJobs></SavedJobs>
+      },
+    ]
+  }
 ]);
