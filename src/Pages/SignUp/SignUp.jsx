@@ -1,4 +1,4 @@
-import {GoogleAuthProvider,createUserWithEmailAndPassword,signInWithPopup,} from "firebase/auth";
+import {GoogleAuthProvider,createUserWithEmailAndPassword,getAuth,onAuthStateChanged,signInWithPopup,} from "firebase/auth";
 import "react";
 import auth from "../../firebase/firebase.config";
 import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
@@ -15,6 +15,8 @@ const SignUp = () => {
   const [sendUserToDb, setSendUserToDb] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
   const [isNewUser, setIsNewUser] = useState()
+  const auth = getAuth();
+
 
 
 
@@ -32,7 +34,27 @@ const SignUp = () => {
         console.log("is it new user ",res.data.isNewUser)
         setIsNewUser(res.data.isNewUser)
         if (isNewUser) {
-          await insertUserIntoDB()
+
+
+
+          onAuthStateChanged(auth, async (user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              setCurrentUser(user)
+              // https://firebase.google.com/docs/reference/js/auth.user
+              console.log("eta new user -_-",user)
+              await insertUserIntoDB()
+              // ...
+            } else {
+              // User is signed out
+              // ...
+            }
+          });
+          
+
+          
+
+         
         }
         // isNewUser
       })
@@ -47,9 +69,9 @@ const SignUp = () => {
     // console.log(sendUserToDb);
     // console.log("line 39 signup.js");
     if (isNewUser) {
-      // console.log(sendUserToDb,user);
-      // axios.post("https://elegant-bd-jobs.onrender.com/insertuser", user)
-      axios.post("http://localhost:5000/insertuser", currentUser)
+      console.log("current user -> ",currentUser);
+      axios.post("https://elegant-bd-jobs.onrender.com/insertuser", currentUser)
+      // axios.post("http://localhost:5000/insertuser", currentUser)
           .then(function (response) {
             console.log("axios response ", response);
           })

@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
       {
         path: "/set-employee-profile",
         element: <SetEmployeeProfile></SetEmployeeProfile>
-      },
+      },{
         path: "/setrole",
         element: <SetRole></SetRole>
       },

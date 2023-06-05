@@ -10,7 +10,7 @@ const useUpdateInfo = (e) => {
     useEffect(() => {
     console.log("from hook inside use effect ",data)
     if (currentUser?.uid) {
-        axios.put(`http://localhost:5000/update-single-user/${currentUser.uid}`,data);
+        axios.put(`http://localhost:5000/update-single-company/${currentUser.uid}`,data);
     }
   }, [e]);
   return [data, setData];
