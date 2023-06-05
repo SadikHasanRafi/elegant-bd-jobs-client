@@ -49,6 +49,7 @@ const Login = () => {
         // const credential = GoogleAuthProvider.credentialFromResult(result);
         // const token = credential.accessToken;
         // The signed-in user info.
+        console.log(result.user)
         setCurrentUser(result.user)
         await checkIsUserNew(result.user)
         // IdP data available using getAdditionalUserInfo(result)

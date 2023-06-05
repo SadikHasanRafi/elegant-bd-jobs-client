@@ -7,6 +7,7 @@ import Jobs from "../Pages/Jobs/Jobs";
 import Login from "../Pages/Login/Login";
 import NotFound from "../Pages/Shared/Loading/NotFound/NotFound";
 import SetCompanyProfile from "../Pages/SetCompanyProfile/SetCompanyProfile";
+import SetEmployeeProfile from "../Pages/SetEmployeeProfile/SetEmployeeProfile";
 
 
 export const router = createBrowserRouter([
@@ -36,8 +37,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "/set-company-profile",
+        //etar kam kortisi
         element: <SetCompanyProfile></SetCompanyProfile>
-      }
+      },
+      {
+        path: "/set-employee-profile",
+        element: <SetEmployeeProfile></SetEmployeeProfile>
+      },
 
     ],
   },
