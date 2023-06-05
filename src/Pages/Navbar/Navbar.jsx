@@ -21,6 +21,10 @@ const Navbar = () => {
     const menuItems = (
         <>
         {/* <li>
+
+  const menuItems = (
+    <>
+      {/* <li>
         <a>Item 1</a>
       </li> */}
       {/* <li tabIndex={0}>
@@ -51,13 +55,40 @@ const Navbar = () => {
       <li>
         <Link to="/dashboard">Dashboard</Link>
       </li>
-      </>
-    )
+      <div className="dropdown dropdown-end">
+        <label tabIndex={0} className="btn btn-ghost">
+          <div className="indicator">
+            <svg
+              className="h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M20 17H22V19H2V17H4V10C4 5.58172 7.58172 2 12 2C16.4183 2 20 5.58172 20 10V17ZM18 17V10C18 6.68629 15.3137 4 12 4C8.68629 4 6 6.68629 6 10V17H18ZM9 21H15V23H9V21Z"></path>
+            </svg>
+            <span className="badge badge-xs badge-primary indicator-item"></span>
+          </div>
+        </label>
+        <div
+          tabIndex={0}
+          className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+        >
+          <div className="card-body">
+            <button className="font-bold text-lg text-left">8 Itemfzsdgzsfgs</button>
+            <button className="font-bold text-lg text-left">8 Itfhgems</button>
+            <button className="font-bold text-lg text-left">8 Itegdhcfghcff ms</button>
+            <div className="card-actions">
+              <button className="btn-style  btn-block">Clear All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
   return (
     <div className="border-b-[1px] sticky top-0 z-10 w-full bg-white bg-opacity-90 backdrop-blur-md">
-    <div className="navbar bg-transparent p-5 bg-base-100 md:w-4/5 mx-auto">
-      <div className="navbar-start">
-        {/* <div className="dropdown">
+      <div className="navbar bg-transparent p-5 bg-base-100 md:w-4/5 mx-auto">
+        <div className="navbar-start">
+          {/* <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,16 +112,19 @@ const Navbar = () => {
             {menuItems}
           </ul>
         </div> */}
-       <Link to='/'><img src={logo} className="h-7" alt="logo" /></Link>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {menuItems}
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <Link to="/login" className="btnOnlyText">Login</Link>
-        <a className="btn-style">Get started</a>
+          <Link to="/">
+            <img src={logo} className="h-7" alt="logo" />
+          </Link>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{menuItems}</ul>
+        </div>
+        <div className="navbar-end">
+          <Link to="/login" className="btnOnlyText">
+            Login
+          </Link>
+          <a className="btn-style">Get started</a>
+        </div>
       </div>
 
 
@@ -101,7 +135,6 @@ const Navbar = () => {
 {/* testing ekhane ses */}
 
 
-    </div>
     </div>
   );
 };
