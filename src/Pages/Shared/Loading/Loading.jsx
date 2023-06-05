@@ -1,9 +1,8 @@
-import 'react';
 
 const Loading = () => {
     return (
         <div>
-            
+            <p>Loading...</p>
         </div>
     );
 };

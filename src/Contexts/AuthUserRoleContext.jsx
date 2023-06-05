@@ -1,18 +1,33 @@
 import 'react';
 import { createContext, useState } from 'react';
 import auth from '../firebase/firebase.config';
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 export const AuthUserRoleContext = createContext()
 
 const AuthUserRoleProvider = ({children}) => {
-    const [user, setUser] = useState(auth.currentUser)
+    const [currentUser, setCurrentUser] = useState(auth.currentUser)
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/auth.user
+        //   const uid = user.uid;
+          setCurrentUser(user)
+          // ...
+        } else {
+            setCurrentUser(user)
+          // User is signed out
+          // ...
+        }
+      });
+      
+    const data = {currentUser,setCurrentUser}
+    console.log("from auth context page ",currentUser)
     
-    const data = {user,setUser}
-    console.log("user is",user)
-    return <AuthUserRoleContext.Provider value={data}>
-        {children}
-    </AuthUserRoleContext.Provider>
+    return  <AuthUserRoleContext.Provider value={data}>
+                {children}
+            </AuthUserRoleContext.Provider>
 };
 
 export default AuthUserRoleProvider;
