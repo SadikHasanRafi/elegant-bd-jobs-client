@@ -5,8 +5,8 @@ import Jobs from "../Pages/Jobs/Jobs";
 import Login from "../Pages/Login/Login";
 import NotFound from "../Pages/Shared/Loading/NotFound/NotFound";
 import SetRole from "../Pages/SetRole/SetRole";
-import DashboardLayout from "../Layout/DashboardLayout";
 import SavedJobs from "../Pages/Dashboard/SavedJobs/SavedJobs";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -33,16 +33,21 @@ export const router = createBrowserRouter([
         path: "/setrole",
         element: <SetRole></SetRole>
       },
+      {
+        path: "/dashboard",
+        element: <Dashboard/>,
+        children: [
+          {
+            path: "dashboard/savedjobs",
+            element: <SavedJobs></SavedJobs>
+          },
+          {
+            path: "dashboard/user",
+            element: <SavedJobs></SavedJobs>
+          },
+        ]
+      }
     ],
   },
-  {
-    path: "dashboard",
-    element: <DashboardLayout></DashboardLayout>,
-    children: [
-      {
-        path: "dashboard/savedjobs",
-        element: <SavedJobs></SavedJobs>
-      },
-    ]
-  }
+  
 ]);
