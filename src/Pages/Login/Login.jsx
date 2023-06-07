@@ -18,7 +18,7 @@ const Login = () => {
     // console.log("User is new or false:",email);
     // console.log(emailRef.current.value)
     // console.log("inside check is user new eta sign in by email pass")
-      await axios.get(`http://localhost:5000/get-single-user?email=${email}`)
+      await axios.get(`https://elegant-bd-jobs.onrender.com/get-single-user?email=${email}`)
       .then( async (res) => {
         console.log("is it new user ",res.data.isNewUser)
         setIsNewUser(res.data.isNewUser)

@@ -1,10 +1,10 @@
 import {GoogleAuthProvider,createUserWithEmailAndPassword,getAuth,onAuthStateChanged,signInWithPopup,} from "firebase/auth";
 import "react";
-import { useContext,  useRef, useState } from "react";
+import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Loading from "../Shared/Loading/Loading";
 import { useNavigate } from "react-router-dom";
-import { AuthUserRoleContext } from "../../Contexts/AuthUserRoleContext";
 
 const SignUp = () => {
   
@@ -12,7 +12,9 @@ const SignUp = () => {
   const emailRef = useRef(null);
   const provider = new GoogleAuthProvider();
   const { setCurrentUser, currentUser } = useContext(AuthUserRoleContext);
+  const [sendUserToDb, setSendUserToDb] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
+  const [isNewUser, setIsNewUser] = useState()
   const auth = getAuth();
   const navigate = useNavigate()
 
@@ -20,40 +22,56 @@ const SignUp = () => {
 
 
 
+  useEffect( () => {
+      
+  }, [isNewUser]);
 
+
+  const checkIsUserNew = async (email) => {
+    // console.log("User is new or false:",email);
+    // console.log(emailRef.current.value)
+    // console.log("inside check is user new eta sign in by email pass")
+      await axios.get(`https://elegant-bd-jobs.onrender.com/get-single-user?email=${email}`)
+      .then( async (res) => {
+        console.log("is it new user ",res.data.isNewUser)
+        setIsNewUser(res.data.isNewUser)
+        if (res.data.isNewUser) {
+
+
+
+
+            // console.log("please navigate kaj kor")
+          navigate("/setrole")
+          
+
+         
+        }
+        // isNewUser
+      })
+      .catch((error) => {
+        console.error("Error retrieving user:", error);
+      });
+    }
   
   
 
   const insertUserIntoDB = async () => {
-
-
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        setCurrentUser(user)
-        axios.post("https://elegant-bd-jobs.onrender.com/insertuser", currentUser)
-        .then(function (response) {
-          console.log("axios response ", response);
-        })
-        .catch(function (error) {
-          console.warn(error);
-        });
-        // https://firebase.google.com/docs/reference/js/auth.user
-        // console.log("eta new user -_-",user)
-        // ...
-       
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
-
-
-
+    // console.log(sendUserToDb);
+    // console.log("line 39 signup.js");
+    if (isNewUser) {
       console.log("current user -> ",currentUser);
-
+      axios.post("https://elegant-bd-jobs.onrender.com/insertuser", currentUser)
+      // axios.post("https://elegant-bd-jobs.onrender.com/insertuser", currentUser)
+          .then(function (response) {
+            console.log("axios response ", response);
+          })
+          .catch(function (error) {
+            console.warn(error);
+          });
+      
+      setSendUserToDb(false);
     }
-
+  };
 
   const handleSignInByEmailPassword = async (e) => {
     setIsLoading(true)
@@ -63,31 +81,27 @@ const SignUp = () => {
     
     const password = e.target.password?.value;
     // console.log(email, password);
-    
+    console.log("90 line signin by email and password : ",email)
+    setSendUserToDb(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
-        setCurrentUser(userCredential?.user);
-        navigate("/setrole")
-        await insertUserIntoDB();
+        setCurrentUser(userCredential.user);
+        await checkIsUserNew(email)
+        // await insertUserIntoDB();
       })
       .catch((error) => {
         const errorMessage = error.message;
-        // console.log(errorMessage);
-        if (errorMessage==="Firebase: Error (auth/email-already-in-use).") {
-          navigate("/login")
-        }
+        console.warn(errorMessage);
         setErr(error);
-        console.log(err)
       })
       .finally(()=>{
+        console.log("finally block")
         setIsLoading(false)
       })
     
     // console.log( err);
   };
 
-
-//deprecated
   const handleSignInByGoogle = async () => {
     setIsLoading(true)
     

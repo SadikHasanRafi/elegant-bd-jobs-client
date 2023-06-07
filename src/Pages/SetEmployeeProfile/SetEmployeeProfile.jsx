@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import { redirect } from "react-router-dom";
 
 const SetEmployeeProfile = () => {
+  const navigate = useNavigate()
+  const {currentUser} = useContext(AuthUserRoleContext)
+
   const [resumeData, setResumeData] = useState({
     personalInformation: {
       fullName: "",
@@ -34,6 +41,7 @@ const SetEmployeeProfile = () => {
       desiredJobTitle: "",
       preferredLocation: "",
     },
+    uid: currentUser?.uid || ""
   });
 
   const handleInputChange = (e) => {
@@ -102,16 +110,19 @@ const SetEmployeeProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Resume Data:", resumeData);
-
-    // Insert logic here to make an Axios POST request with the resumeData
-    // const url = 'https://example.com';
-    // axios.post(url, resumeData)
-    //   .then(response => {
-    //     console.log('Request successful!');
-    //   })
-    //   .catch(error => {
-    //     console.error('Request failed:', error);
-    //   });
+    resumeData.uid=currentUser.uid
+    const url = 'https://elegant-bd-jobs.onrender.com/set-employee';
+    axios.post(url, resumeData)
+      .then(response => {
+        console.log('Request successful!',response.data.acknowledged);//eta tue hole redirect kore dashboard e niye jete hobe
+        if (response.data.acknowledged === true) {
+          navigate("/dashboard");
+        }
+      })
+      .catch(error => {
+        console.error('Request failed:', error);
+      });
+      navigate("/dashboard")
   };
 
   return (

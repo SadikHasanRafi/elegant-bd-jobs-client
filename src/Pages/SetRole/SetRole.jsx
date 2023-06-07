@@ -1,23 +1,37 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext,  useState } from "react";
 import jobSeeker from "../../assets/Search engines-bro.svg";
 import jobGiver from "../../assets/Recommendation letter-bro.svg";
-import { AuthUserRoleContext } from "../../Contexts/AuthUserRoleContext";
+// import { AuthUserRoleContext } from "../../Contexts/AuthUserRoleContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
 
 const SetRole = () => {
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedRole, setSelectedRole] = useState("");
   const {currentUser} = useContext(AuthUserRoleContext)
+  const navigate = useNavigate()
 
-  const handleRoleSelection = (role) => {
+  const handleRoleSelection =async (role) => {
     setSelectedRole(role);
-    console.log("Selected role:", role,currentUser?.uid);
+    // console.log(role)
+    const x = await axios.post(`https://elegant-bd-jobs.onrender.com/set-user-type`,{uid:currentUser?.uid,email:currentUser?.email,role:role})
+                    .then(res=>{
+                      console.log("hopefully colbe ",res)
+                      if (role==="jobSeeker") {
+                        navigate("/set-employee-profile")
+                      }else{
+                        navigate( "/set-company-profile")
+                      }
+                    })
+    console.log("Selected role:", role,currentUser?.uid,x);
   };
+  
+  // useEffect(()=>{
+  //   // axios.put(`https://elegant-bd-jobs.onrender.com/update-single-user/${currentUser?.uid}`,{role:selectedRole})
+  //   // .then((res)=>console.log(" line 26 update single user response ",res))
+  //   console.log(selectedRole)
 
-  useEffect(()=>{
-    axios.put(`http://localhost:5000/update-single-user/${currentUser?.uid}`,{role:selectedRole})
-    .then((res)=>console.log(res))
-
-  },[selectedRole])
+  // },[])
 
   return (
     <div className="w-full justify-center flex flex-col items-center min-h-screen">

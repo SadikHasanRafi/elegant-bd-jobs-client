@@ -1,22 +1,31 @@
 import "react";
 import logo from '../../assets/logo.svg'
-import { Link } from "react-router-dom";
-import { getAuth, signOut } from "firebase/auth";
-import { AuthUserRoleContext } from "../../Contexts/AuthUserRoleContext";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
+import { getAuth, signOut } from "firebase/auth";
+
 
 const Navbar = () => {
 
+  const {currentUser,setCurrentUser} = useContext(AuthUserRoleContext)
+  const navigate = useNavigate()
+
   //tesing er jonno ei block ta 
-
   const auth = getAuth();
-  const { setCurrentUser, currentUser } = useContext(AuthUserRoleContext);
-  // signOut(auth).then(() => {
-  //   console.log("sign out done")
-  //   // Sign-out successful.
-  // })
 
-  //testing ekhane done
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      navigate("/")
+      setCurrentUser(null)
+    }).catch((error) => {
+      // An error happened.
+      console.log(error)
+    });
+    
+  }
+
 
     const menuItems = (
         <>
@@ -53,6 +62,9 @@ const Navbar = () => {
         <Link to="/setrole">Select Role</Link>
       </li>
       <li>
+        <Link to="/jobs">Show all jobs</Link>
+      </li>
+      <li>
         <Link to="/dashboard">Dashboard</Link>
       </li>
       <div className="dropdown dropdown-end">
@@ -73,11 +85,12 @@ const Navbar = () => {
           className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
         >
           <div className="card-body">
-            <button className="font-bold text-lg text-left">8 Itemfzsdgzsfgs</button>
-            <button className="font-bold text-lg text-left">8 Itfhgems</button>
-            <button className="font-bold text-lg text-left">8 Itegdhcfghcff ms</button>
+            <button className="font-thin text-sm text-left">1. Job due date</button>
+            <button className="font-thin text-sm text-left">2. Job due date</button>
+            <button className="font-thin text-sm text-left">3. Job due date</button>
             <div className="card-actions">
-              <button className="btn-style  btn-block">Clear All</button>
+              <Link to="dashboard/dashboard/savedjobs">              <button className="btn-style  btn-block">See All</button></Link>
+
             </div>
           </div>
         </div>
@@ -119,20 +132,25 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
         </div>
+       {
+        currentUser ?
         <div className="navbar-end">
-          <Link to="/login" className="btnOnlyText">
-            Login
-          </Link>
-          <a className="btn-style">Get started</a>
+          <button onClick={handleSignOut} className="btnOnlyText">
+            Logout
+          </button>
         </div>
+        :
+        <div className="navbar-end">
+        <Link to="/login" className="btnOnlyText">
+          Login
+        </Link>
+        <Link to="/signup" className="btn-style">Get started</Link>
+      </div>
+       }
       </div>
 
 
-{/* eta testing er jjonno so far */}
 
-<a className="btn btn-outline btn-accent" onClick={async () =>{ await signOut(auth);console.log("sign out");setCurrentUser({}) }}> Logout</a>
-
-{/* testing ekhane ses */}
 
 
     </div>

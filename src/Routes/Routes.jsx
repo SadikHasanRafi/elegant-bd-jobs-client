@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import SignUp from "../Pages/SignUp/SignUp";
-
 import Jobs from "../Pages/Jobs/Jobs";
 import Login from "../Pages/Login/Login";
 import NotFound from "../Pages/Shared/Loading/NotFound/NotFound";
@@ -11,6 +10,8 @@ import SetEmployeeProfile from "../Pages/SetEmployeeProfile/SetEmployeeProfile";
 import SetRole from "../Pages/SetRole/SetRole";
 import SavedJobs from "../Pages/Dashboard/SavedJobs/SavedJobs";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import SetJob from "../Pages/SetJob/SetJob";
+import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 
 
 export const router = createBrowserRouter([
@@ -25,6 +26,9 @@ export const router = createBrowserRouter([
       },{
         path:"/signup",
         element:<SignUp></SignUp>
+      },{
+        path:"/setjob",
+        element:<SetJob></SetJob>
       },
       {
         path: "*",
@@ -60,7 +64,8 @@ export const router = createBrowserRouter([
           },
           {
             path: "dashboard/user",
-            element: <SavedJobs></SavedJobs>
+            index:true,
+            element: <UserProfile></UserProfile>
           },
         ]
       }
