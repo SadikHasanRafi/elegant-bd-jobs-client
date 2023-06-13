@@ -1,6 +1,5 @@
-import 'react';
 
-const Banner = () => {
+const DashboardLayout = () => {
     return (
         <div>
             
@@ -8,4 +7,4 @@ const Banner = () => {
     );
 };
 
-export default Banner;
+export default DashboardLayout;
