@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
+import { AuthUserRoleContext } from "../../Contexts/AuthUserContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import { redirect } from "react-router-dom";
@@ -41,7 +41,9 @@ const SetEmployeeProfile = () => {
       desiredJobTitle: "",
       preferredLocation: "",
     },
-    uid: currentUser?.uid || ""
+    uid: currentUser?.uid || "",
+    savedJobs:[],
+    appliedJobs:[],
   });
 
   const handleInputChange = (e) => {

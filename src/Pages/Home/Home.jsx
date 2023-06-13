@@ -1,14 +1,14 @@
 import  'react';
 import Banner from './Banner/Banner'
 import Sectors from './Sectors/Sectors';
-import SomeJobs from './SomeJobs/SomeJobs';
+import SomeFeaturedJobs from './SomeFeaturedJobs/SomeFeaturedJobs';
 import AboutUs from '../AboutUs/AboutUs';
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
             <Sectors></Sectors>
-            <SomeJobs></SomeJobs>
+            <SomeFeaturedJobs></SomeFeaturedJobs>
             <AboutUs></AboutUs>
         </div>
     );

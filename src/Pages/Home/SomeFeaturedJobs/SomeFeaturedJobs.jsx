@@ -1,10 +1,10 @@
 import "react";
 import { useContext } from "react";
 import JobContext from "../../../Contexts/JobContext";
-import Job from "./Job";
 import { Link } from "react-router-dom";
+import JobInFeaturedJobsSection from "./JobInFeaturedJobsSection";
 
-const SomeJobs = () => {
+const SomeFeaturedJobs = () => {
   const jobs = useContext(JobContext);
   return (
     <div className="min-h-screen">
@@ -14,19 +14,19 @@ const SomeJobs = () => {
       </p>
       <div className="grid gap-5 w-full">
         {jobs.slice(0, 3).map((job) => (
-          <Job
-            company={job.company}
+          <JobInFeaturedJobsSection
+            company={job.companyName}
             key={job.id}
-            description={job.description}
+            description={job.jobDescription}
             category={job.category}
             location={job.location}
-          ></Job>
+          ></JobInFeaturedJobsSection>
         ))}
       </div>
-      <Link to='/jobs' className="btnOnlyText mt-10">See more jobs</Link>
+      <Link to='/jobs'  className="btnOnlyText mt-10">See more jobs</Link>
     </div>
   </div>
   );
 };
 
-export default SomeJobs;
+export default SomeFeaturedJobs;

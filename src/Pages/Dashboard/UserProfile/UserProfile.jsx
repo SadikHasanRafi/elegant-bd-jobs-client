@@ -1,9 +1,9 @@
 import 'react';
 import { useContext } from 'react';
-import { AuthUserRoleContext } from '../../../Contexts/authUserRoleContext';
+import { AuthUserRoleContext } from '../../../Contexts/AuthUserContext';
 
 const UserProfile = () => {
-    const {currentUser,getUserType} = useContext(AuthUserRoleContext)
+    const {currentUser} = useContext(AuthUserRoleContext)
     console.log(currentUser?.uid)
     return (
         <div>

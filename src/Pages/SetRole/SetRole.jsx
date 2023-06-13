@@ -4,27 +4,51 @@ import jobGiver from "../../assets/Recommendation letter-bro.svg";
 // import { AuthUserRoleContext } from "../../Contexts/AuthUserRoleContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
+import { AuthUserRoleContext } from "../../Contexts/AuthUserContext";
 
 const SetRole = () => {
   const [selectedRole, setSelectedRole] = useState("");
   const {currentUser} = useContext(AuthUserRoleContext)
   const navigate = useNavigate()
+  const [loading,setLoading] = useState()
 
-  const handleRoleSelection =async (role) => {
+  // console.log("current user ",currentUser)
+
+  const handleRoleSelection = async (role) => {
     setSelectedRole(role);
-    // console.log(role)
-    const x = await axios.post(`https://elegant-bd-jobs.onrender.com/set-user-type`,{uid:currentUser?.uid,email:currentUser?.email,role:role})
-                    .then(res=>{
-                      console.log("hopefully colbe ",res)
-                      if (role==="jobSeeker") {
-                        navigate("/set-employee-profile")
-                      }else{
-                        navigate( "/set-company-profile")
-                      }
-                    })
-    console.log("Selected role:", role,currentUser?.uid,x);
+    setLoading(true)
+  
+    // Set the role in browser cookies with expiration date of 3 days
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 3);
+    const cookieValue = `${role}; expires=${expirationDate.toUTCString()}; path=/;`;
+    document.cookie = `${currentUser.uid}=${cookieValue}`;
+  
+    // Set the role in local storage
+    localStorage.setItem(currentUser.uid, role);
+  
+    const x = await axios
+      .post(`https://elegant-bd-jobs.onrender.com/set-user-type`, {
+        uid: currentUser?.uid,
+        email: currentUser?.email,
+        role: role
+      })
+      .then((res) => {
+        setLoading(false)
+        console.log("Response:", res);
+        if (role === "jobSeeker") {
+          navigate("/set-employee-profile");
+        } else {
+          navigate("/set-company-profile");
+        }
+        setLoading(false)
+
+      });
+  
+    console.log("Selected role:", role, currentUser?.uid, x);
   };
+  
+
   
   // useEffect(()=>{
   //   // axios.put(`https://elegant-bd-jobs.onrender.com/update-single-user/${currentUser?.uid}`,{role:selectedRole})

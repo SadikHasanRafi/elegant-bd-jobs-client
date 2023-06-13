@@ -2,7 +2,7 @@ import "react";
 import logo from '../../assets/logo.svg'
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthUserRoleContext } from "../../Contexts/authUserRoleContext";
+import { AuthUserRoleContext } from "../../Contexts/AuthUserContext";
 import { getAuth, signOut } from "firebase/auth";
 
 
@@ -62,7 +62,7 @@ const Navbar = () => {
         <Link to="/setrole">Select Role</Link>
       </li>
       <li>
-        <Link to="/jobs">Show all jobs</Link>
+        <Link to="/all-jobs">Show all jobs</Link>
       </li>
       <li>
         <Link to="/dashboard">Dashboard</Link>

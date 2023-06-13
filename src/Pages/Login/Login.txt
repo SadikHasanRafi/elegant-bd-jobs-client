@@ -1,30 +1,26 @@
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup  } from "firebase/auth";
 import "react";
 import { useContext, useState } from "react";
+import { AuthUserRoleContext } from "../../Contexts/AuthUserRoleContext";
 import axios from "axios";
 import Loading from "../Shared/Loading/Loading";
-import { redirect, useLocation, useNavigate } from "react-router-dom";
-import { AuthUserRoleContext } from "../../Contexts/AuthUserContext";
+import { redirect } from "react-router-dom";
 
 
 const Login = () => {
 
-  const { setCurrentUser, currentUser, userType } = useContext(AuthUserRoleContext);
+  const { setCurrentUser, currentUser } = useContext(AuthUserRoleContext);
   const [err, setErr] = useState("");
   const [isLoading, setIsLoading] = useState(false)
   const [isNewUser, setIsNewUser] = useState()
-  const navigate = useNavigate()
-  const location = useLocation();
 
-
-  //deprecated and don't touch it 
   const checkIsUserNew = async (email) => {
     // console.log("User is new or false:",email);
     // console.log(emailRef.current.value)
     // console.log("inside check is user new eta sign in by email pass")
       await axios.get(`https://elegant-bd-jobs.onrender.com/get-single-user?email=${email}`)
       .then( async (res) => {
-        // console.log("is it new user ",res.data.isNewUser)
+        console.log("is it new user ",res.data.isNewUser)
         setIsNewUser(res.data.isNewUser)
         if (isNewUser) {
           console.log("new user")
@@ -42,7 +38,6 @@ const Login = () => {
       });
     }
 
-    //deprecated
   const handleSignInWithGoogle = async () => {
     setIsLoading(true);
     console.log(isLoading)
@@ -83,11 +78,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, e.target.email.value, e.target.password.value)
       .then((userCredential) => {
         // Signed in 
-        // console.log(typeof(userType))
         setCurrentUser(userCredential.user)
-        localStorage.setItem(`${userCredential.user.uid}`,userType)
-        navigate(location.state?.from || "/dashboard"); // Redirect to previous location or "/dashboard" if no previous location
-        console.log(userCredential)
         // ...
       })
       .catch((error) => {
@@ -95,7 +86,6 @@ const Login = () => {
         setErr(errorMessage)
       }).finally(()=>{
         setIsLoading(false)
-        // console.log(first)
       });
       console.log(currentUser)
 

@@ -1,17 +1,18 @@
+/* eslint-disable no-unused-vars */
 import {GoogleAuthProvider,createUserWithEmailAndPassword,getAuth,onAuthStateChanged,signInWithPopup,} from "firebase/auth";
 import "react";
 import { useContext,  useRef, useState } from "react";
 import axios from "axios";
 import Loading from "../Shared/Loading/Loading";
 import { useNavigate } from "react-router-dom";
-import { AuthUserRoleContext } from "../../Contexts/AuthUserRoleContext";
+import { AuthUserRoleContext } from "../../Contexts/AuthUserContext";
 
 const SignUp = () => {
   
   const [err, setErr] = useState({});
   const emailRef = useRef(null);
   const provider = new GoogleAuthProvider();
-  const { setCurrentUser, currentUser } = useContext(AuthUserRoleContext);
+  const { setCurrentUser, currentUser,userType } = useContext(AuthUserRoleContext);
   const [isLoading, setIsLoading] = useState(false)
   const auth = getAuth();
   const navigate = useNavigate()
@@ -68,18 +69,18 @@ const SignUp = () => {
       .then(async (userCredential) => {
         setCurrentUser(userCredential?.user);
         navigate("/setrole")
-        await insertUserIntoDB();
       })
       .catch((error) => {
         const errorMessage = error.message;
         // console.log(errorMessage);
         if (errorMessage==="Firebase: Error (auth/email-already-in-use).") {
-          navigate("/login")
+          navigate("/dashboard")
         }
         setErr(error);
         console.log(err)
       })
-      .finally(()=>{
+      .finally(async ()=>{
+        await insertUserIntoDB();
         setIsLoading(false)
       })
     
@@ -97,8 +98,8 @@ const SignUp = () => {
         setCurrentUser(result.user);
         
         console.log("119 number line sign in by google function maail : ")
-        setSendUserToDb(true);
-        await checkIsUserNew(result.user.email)
+        // setSendUserToDb(true);
+        // await checkIsUserNew(result.user.email)
         // await insertUserIntoDB();
         // console.log("login by emailhoise ", user.email);
       })
@@ -122,6 +123,10 @@ const SignUp = () => {
      
     // console.log("mew");
   };
+
+  if (isLoading) {
+    return <Loading></Loading>
+  }
 
   return (
     <div>

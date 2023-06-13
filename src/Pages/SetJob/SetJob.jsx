@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import  { useContext,  useState } from 'react';
-import { AuthUserRoleContext } from '../../Contexts/authUserRoleContext';
+import { AuthUserRoleContext } from '../../Contexts/AuthUserContext';
 
 function SetJob () {
     // const [currentUser,setCurrentUser] = useState({})
@@ -23,7 +23,8 @@ function SetJob () {
     experienceLevel: "",
     salaryRange: "",
     applicationLink: "",
-    postedDate: ""
+    postedDate: "",
+    categories: [],
   });
 
   const handleChange = (event) => {
@@ -43,13 +44,33 @@ function SetJob () {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleAddCategory = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      categories: [...prevData.categories, ""],
+    }));
+  };
+
+
+  const handleCategoryChange = (index, event) => {
+    const { value } = event.target;
+    setFormData((prevData) => {
+      const categories = [...prevData.categories];
+      categories[index] = value;
+      return {
+        ...prevData,
+        categories,
+      };
+    });
+  };
+
+  const handleSubmit =async  (event) => {
     event.preventDefault();
     console.log(formData);
     console.log("user er uid hoolo ",currentUser?.uid)
-    axios.post('https://elegant-bd-jobs.onrender.com/add-job', formData)
+    await axios.post('https://elegant-bd-jobs.onrender.com/add-job', formData)
     .then(response => {
-      console.log(response.data);
+      console.log(response.data.insertedId,response.data);
       // Reset the form data
       setFormData({
         jobTitle: "",
@@ -64,7 +85,8 @@ function SetJob () {
         salaryRange: "",
         applicationLink: "",
         postedDate: "",
-        uid: currentUser?.uid || ""
+        uid: currentUser?.uid || "",
+        categories: [],
       });
     })
     .catch(error => {
@@ -163,6 +185,27 @@ function SetJob () {
             className="w-full border border-gray-300 rounded px-3 py-2"
           ></textarea>
         </div>
+
+        <div className="mb-4">
+            <label className="block font-bold mb-1">Categories</label>
+            {formData.categories.map((category, index) => (
+              <input
+                key={index}
+                type="text"
+                value={category}
+                onChange={(event) => handleCategoryChange(index, event)}
+                className="w-full border border-gray-300 rounded px-3 py-2 mb-2"
+              />
+            ))}
+            <button
+              type="button"
+              onClick={handleAddCategory}
+              className="bg-blue-500 text-white py-2 px-4 rounded"
+            >
+              Add
+            </button>
+          </div>
+
 
         <div className="mb-4">
           <label className="block font-bold mb-1">Experience Level</label>

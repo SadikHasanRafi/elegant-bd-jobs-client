@@ -1,10 +1,11 @@
 import "react";
 import JobContext from "../../Contexts/JobContext";
 import { useContext } from "react";
-import Job from "../Home/SomeJobs/Job";
+import Job from "./Job";
 
 const Jobs = () => {
   const jobs = useContext(JobContext);
+  console.log(jobs)
   return (
     <div className="min-h-screen">
       <div className="md:w-4/5 lg:w-4/5 sm:w-full mx-auto justify-center flex flex-col items-center py-[10rem] px-4">
@@ -14,11 +15,10 @@ const Jobs = () => {
         <div className="grid gap-5 w-full">
           {jobs.map((job) => (
             <Job
-              company={job.company}
-              key={job.id}
-              description={job.description}
-              category={job.category}
-              location={job.location}
+
+              key={job._id}
+              value={job}
+              
             ></Job>
           ))}
         </div>
